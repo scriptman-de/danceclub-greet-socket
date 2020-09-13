@@ -79,6 +79,9 @@
       function submitForm() {
         let user = userField.value;
         let text = textField.value;
+
+        if (user.trim() == "" || text.trim() == "") return;
+
         socket.emit("stream message", { user, text });
         textField.value = "";
         textField.focus();

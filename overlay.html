@@ -41,16 +41,26 @@
 
       socket.on("stream message", (msgstring) => {
         const msgs = document.getElementsByClassName(
-          "stream-message"
+          "stream-message-container"
         );
         if (msgs.length + 1 > maxMessages) {
           msgs[0].remove();
         }
 
-        var _el = document.createElement("div");
-        _el.classList.add("stream-message");
-        _el.innerHTML = `<strong>${msgstring.user}:</strong><br><p>${msgstring.text}`;
-        document.getElementById("container").appendChild(_el);
+        const _container = document.createElement("div");
+        _container.classList.add("stream-message-container");
+
+        const _user = document.createElement("span");
+        _user.classList.add("stream-message-user");
+        _container.appendChild(_user);
+
+        _container.appendChild(document.createElement("br"));
+
+        const _message = document.createElement("p");
+        _message.classList.add("stream-message");
+        _container.appendChild(_message);
+
+        document.getElementById("container").appendChild(_container);
       });
     </script>
   </body>
