@@ -52,12 +52,14 @@
 
         const _user = document.createElement("span");
         _user.classList.add("stream-message-user");
+        _user.innerText = msgstring.user;
         _container.appendChild(_user);
 
         _container.appendChild(document.createElement("br"));
 
         const _message = document.createElement("p");
         _message.classList.add("stream-message");
+        _message.innerText = msgstring.text;
         _container.appendChild(_message);
 
         document.getElementById("container").appendChild(_container);
