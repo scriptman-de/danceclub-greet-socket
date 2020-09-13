@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Stream Messages</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+      body {
+        margin: 0;
+        font-size: 12pt;
+      }
+      #container {
+        width: 400px;
+        height: 800px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        padding: 10px;
+        max-width: 100%;
+        max-height: 100%;
+        overflow: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container"></div>
+    <script type="text/javascript">
+      let socket = io();
+      const maxMessages = 10;
+
+      socket.on("stream message", (msgstring) => {
+        const msgs = document.getElementsByClassName(
+          "stream-message"
+        );
+        if (msgs.length + 1 > maxMessages) {
+          msgs[0].remove();
+        }
+
+        var _el = document.createElement("div");
+        _el.classList.add("stream-message");
+        _el.innerHTML = `<strong>${msgstring.user}:</strong><br><p>${msgstring.text}`;
+        document.getElementById("container").appendChild(_el);
+      });
+    </script>
+  </body>
+</html>
